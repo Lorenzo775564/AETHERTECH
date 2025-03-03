@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wind-primary: 210 100% 50%;
+  --wind-secondary: 200 30% 60%;
+  --wind-accent: 220 70% 40%;
+
+  --background: 220 20% 97%;
+  --foreground: 220 10% 10%;
+
+  --primary: var(--wind-primary);
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: var(--wind-secondary);
+  --secondary-foreground: 220 10% 10%;
+
+  --accent: var(--wind-accent);
+  --accent-foreground: 0 0% 100%;
+
+  --muted: 220 10% 90%;
+  --muted-foreground: 220 10% 40%;
+}
+
+.dark {
+  --background: 220 20% 10%;
+  --foreground: 220 10% 90%;
+
+  --muted: 220 10% 20%;
+  --muted-foreground: 220 10% 60%;
+}
+
+/* Wind Effects */
+.wind-text {
+  color: hsl(var(--wind-primary));
+  filter: url(#turbulence);
+  animation: textGlow 4s ease-in-out infinite;
+}
+
+.wind-background {
+  background: linear-gradient(45deg, hsl(var(--wind-primary) / 0.1), hsl(var(--wind-secondary) / 0.1));
+  backdrop-filter: blur(100px);
+}
+
+.wind-particles {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%),
+    hsl(var(--wind-primary) / 0.2) 0%,
+    transparent 50%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes textGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 20px hsl(var(--wind-primary) / 0.5), 0 0 40px hsl(var(--wind-primary) / 0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px hsl(var(--wind-primary) / 0.7), 0 0 60px hsl(var(--wind-primary) / 0.5);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+/* Card hover effects */
+.card-wind {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-wind::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, hsl(var(--wind-primary) / 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.card-wind:hover::before {
+  transform: translateX(100%);
+}
+
+/* Section transitions */
+.section-wind {
+  position: relative;
+}
+
+.section-wind::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--wind-primary) / 0.3), transparent);
+}
+
